@@ -3,6 +3,8 @@ import { StyleSheet, Text, View } from "react-native";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
 
+import MealsNavigator from "./navigation/MealsNavigator";
+
 const fetchFonts = () => {
   return Font.loadAsync({
     "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
@@ -22,17 +24,5 @@ export default function App() {
     );
   }
 
-  return (
-    <View style={styles.screen}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
+  return <MealsNavigator />;
 }
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
-  }
-});
