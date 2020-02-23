@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
 
 import { CATEGORIES, MEALS } from "../data/dummy-data";
+import MealItem from "../components/MealItem";
 
 export default function CategoryMealsScreen(props) {
   const categoryId = props.navigation.getParam("categoryId");
@@ -12,15 +13,31 @@ export default function CategoryMealsScreen(props) {
 
   const renderMealItem = itemData => {
     return (
-      <View>
-        <Text>{itemData.item.title}</Text>
-      </View>
+      <MealItem
+        title={itemData.item.title}
+        image={itemData.item.imageUrl}
+        duration={itemData.item.duration}
+        complexity={itemData.item.complexity}
+        affordability={itemData.item.affordability}
+        onSelect={() => {
+          props.navigation.navigate({
+            routeName: "MealDetail",
+            params: {
+              mealId: itemData.item.id
+            }
+          });
+        }}
+      />
     );
   };
 
   return (
     <View style={styles.screen}>
-      <FlatList data={displayedMeals} renderItem={renderMealItem} />
+      <FlatList
+        data={displayedMeals}
+        renderItem={renderMealItem}
+        style={{ width: "100%" }}
+      />
 
       {/* <Button
         title="Go to Details"
@@ -58,6 +75,7 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    padding: 15
   }
 });
