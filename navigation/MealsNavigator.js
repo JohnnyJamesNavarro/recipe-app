@@ -35,7 +35,11 @@ const MealsNavigator = createStackNavigator(
         backgroundColor:
           Platform.OS === "android" ? Colors.primaryColor : "white"
       },
-      headerTintColor: Platform.OS === "android" ? "white" : Colors.primaryColor
+      headerTintColor:
+        Platform.OS === "android" ? "white" : Colors.primaryColor,
+      headerTitleStyle: {
+        maxWidth: 275 // Fixing header titles that are way to long.
+      }
     }
     // With initialRouteName you can change the default initial screen for the stack.
     //initialRouteName: "MealDetail"
