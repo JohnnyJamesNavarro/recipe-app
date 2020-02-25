@@ -43,7 +43,9 @@ const styles = StyleSheet.create({
     elevation: 5
   },
   container: {
-    flex: 1,
+    // Removing flex: 1 and adding height: 100% fixed the style error in ios.
+    //flex: 1,
+    height: "100%",
     borderRadius: 10,
     shadowColor: "black",
     shadowOpacity: 0.26,
