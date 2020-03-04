@@ -6,7 +6,7 @@ import DefaultText from "../components/DefaultText";
 
 import Colors from "../constants/colors";
 
-import { MEALS } from "../data/dummy-data";
+import { useSelector } from "react-redux";
 
 const ListItem = props => {
   return (
@@ -18,7 +18,8 @@ const ListItem = props => {
 
 export default function MealDetailScreen(props) {
   const mealId = props.navigation.getParam("mealId");
-  const selectedMeal = MEALS.find(meal => meal.id === mealId);
+  const availableMeals = useSelector(state => state.meals.meals);
+  const selectedMeal = availableMeals.find(meal => meal.id === mealId);
 
   return (
     <ScrollView contentContainerStyle={styles.screen}>
