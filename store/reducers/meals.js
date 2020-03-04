@@ -32,8 +32,9 @@ const mealsReducer = (state = initialState, action) => {
           favoriteMeals: state.favoriteMeals.concat(newFavoritedMeal) // concat() creates a new array holding the previous data and adding the new specified one
         };
       }
+    default:
+      return state;
   }
-  return state;
 };
 
 export default mealsReducer;

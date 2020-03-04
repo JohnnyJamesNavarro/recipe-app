@@ -24,6 +24,7 @@ export default function MealDetailScreen(props) {
 
   const dispatch = useDispatch();
 
+  // Remember to use useCallback() when an useEffect() dependency has dependencies itself
   const toggleFavoriteHandler = useCallback(() => {
     dispatch(toggleFavorite(mealId));
   }, [dispatch, mealId]);
