@@ -1,5 +1,6 @@
 import { MEALS } from "../../data/dummy-data";
-import { TOGGLE_FAVORITE } from "../actions/meals";
+import { TOGGLE_FAVORITE, SET_FILTERS } from "../actions/meals";
+import { setAutoFocusEnabled } from "expo/build/AR";
 
 const initialState = {
   meals: MEALS,
@@ -32,6 +33,27 @@ const mealsReducer = (state = initialState, action) => {
           favoriteMeals: state.favoriteMeals.concat(newFavoritedMeal) // concat() creates a new array holding the previous data and adding the new specified one
         };
       }
+
+    case SET_FILTERS:
+      const appliedFilters = action.filters;
+      const filteredMeals = state.meals.filter(meal => {
+        if (appliedFilters.glutenFree && !meal.isGlutenFree) {
+          return false;
+        }
+        if (appliedFilters.lactoseFree && !meal.isLactoseFree) {
+          return false;
+        }
+        if (appliedFilters.vegeratian && !meal.isVegetarian) {
+          return false;
+        }
+        if (appliedFilters.vegan && !meal.isVegan) {
+          return false;
+        }
+        return true;
+      });
+
+      return { ...state, filteredMeals: filteredMeals };
+
     default:
       return state;
   }
