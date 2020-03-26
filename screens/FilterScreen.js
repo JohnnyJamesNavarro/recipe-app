@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { useDispatch } from "react-redux";
 import { StyleSheet, Text, View, Switch, Platform } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import CustomHeaderButton from "../components/CustomHeaderButton";
+import { setFilters } from "../store/actions/meals";
 
 import Colors from "../constants/colors";
 
@@ -28,6 +30,8 @@ export default function FilterScreen(props) {
   const [isVegan, setIsVegan] = useState(false);
   const [isVegetarian, setIsVegetarian] = useState(false);
 
+  const dispatch = useDispatch();
+
   // useCallback guarantees the saveFilters() function is only recreated when one of its dependencies changes.
   const saveFilters = useCallback(() => {
     const appliedFilters = {
@@ -37,8 +41,8 @@ export default function FilterScreen(props) {
       vegetarian: isVegetarian
     };
 
-    console.log(appliedFilters);
-  }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian]);
+    dispatch(setFilters(appliedFilters));
+  }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian, dispatch]);
 
   useEffect(() => {
     navigation.setParams({ save: saveFilters });
